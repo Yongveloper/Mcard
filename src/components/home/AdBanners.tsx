@@ -14,8 +14,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 function AdBanners() {
   const { data } = useQuery(['adBanners'], getAdBanners);
 
-  console.log(data);
-
   return (
     <Container>
       <Swiper spaceBetween={8}>

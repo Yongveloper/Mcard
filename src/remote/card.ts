@@ -7,6 +7,8 @@ import {
   query,
   limit,
   startAfter,
+  getDoc,
+  doc,
 } from 'firebase/firestore';
 import { store } from './firebase';
 
@@ -32,4 +34,13 @@ export async function getCards(pageParam?: QuerySnapshot<ICard>) {
   }));
 
   return { items, lastVisible };
+}
+
+export async function getCard(id: string) {
+  const snapshot = await getDoc(doc(store, COLLECTIONTS.CARD, id));
+
+  return {
+    id,
+    ...(snapshot.data() as ICard),
+  };
 }

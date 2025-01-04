@@ -2,7 +2,7 @@ export interface ICard {
   name: string;
   corpName: string;
   tags: string[];
-  benefit: string;
+  benefit: string[];
   promotion?: {
     title: string;
     terms: string;
