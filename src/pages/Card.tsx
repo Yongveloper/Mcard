@@ -7,6 +7,7 @@ import { getCard } from '@/remote/card';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
+import { motion } from 'motion/react';
 
 function CardPage() {
   const { id = '' } = useParams();
@@ -28,23 +29,38 @@ function CardPage() {
   return (
     <div>
       <Top title={`${corpName} ${name}`} subtitle={subtitle} />
+
       <ul>
         {benefit.map((text, index) => (
-          <ListRow
+          <motion.li
             key={text}
-            left={<IconCheck />}
-            contents={
-              <ListRow.Texts title={`혜택 ${index + 1}`} subTitle={text} />
-            }
-          />
+            initial={{ opacity: 0, translateX: -90 }}
+            // whileInView={{ opacity: 1, translateX: 0 }}
+            transition={{
+              duration: 0.7,
+              ease: 'easeInOut',
+              delay: index * 0.1,
+            }}
+            animate={{ opacity: 1, translateX: 0 }}
+          >
+            <ListRow
+              as="div"
+              left={<IconCheck />}
+              contents={
+                <ListRow.Texts title={`혜택 ${index + 1}`} subTitle={text} />
+              }
+            />
+          </motion.li>
         ))}
       </ul>
+
       {promotion && (
         <Flex direction="column" css={termsContainerStyles}>
           <Text bold={true}>유의사항</Text>
           <Text typography="t7">{removeHtmlTags(promotion.terms)}</Text>
         </Flex>
       )}
+
       <FixedBottomButton label="신청하기" onClick={() => {}} />
     </div>
   );
