@@ -7,9 +7,14 @@ import Button from './Button';
 interface IFixedBottomButtonProps {
   label: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
-function FixedBottomButton({ label, onClick }: IFixedBottomButtonProps) {
+function FixedBottomButton({
+  label,
+  onClick,
+  disabled,
+}: IFixedBottomButtonProps) {
   const $portalRoot = document.getElementById('root-portal');
 
   if (!$portalRoot) {
@@ -18,7 +23,13 @@ function FixedBottomButton({ label, onClick }: IFixedBottomButtonProps) {
 
   return createPortal(
     <Container>
-      <Button size="medium" full={true} onClick={onClick} css={buttonStyles}>
+      <Button
+        size="medium"
+        disabled={disabled}
+        full={true}
+        onClick={onClick}
+        css={buttonStyles}
+      >
         {label}
       </Button>
     </Container>,
