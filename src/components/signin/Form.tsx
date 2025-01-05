@@ -57,7 +57,7 @@ function Form({ onSubmit }: { onSubmit: (formValues: IFormValues) => void }) {
 
       <Spacing size={12} />
 
-      <Link to="signup" css={linkStyles}>
+      <Link to="/signup" css={linkStyles}>
         <Text typography="t7">아직 계정이 없으신가요?</Text>
       </Link>
     </Flex>

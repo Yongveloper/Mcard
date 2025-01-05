@@ -6,8 +6,11 @@ import { IFormValues } from '@/models/signup';
 
 import { auth, store } from '@/remote/firebase';
 import { COLLECTIONTS } from '@/constants';
+import { useNavigate } from 'react-router-dom';
 
 function SignupPage() {
+  const navigate = useNavigate();
+
   const handleSubmit = async (formValues: IFormValues) => {
     const { email, password, name } = formValues;
 
@@ -29,7 +32,7 @@ function SignupPage() {
 
     await setDoc(doc(collection(store, COLLECTIONTS.USER), user.uid), newUser);
 
-    // TODO: 로그인
+    navigate('/', { replace: true });
   };
 
   return (
