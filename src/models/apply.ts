@@ -11,4 +11,12 @@ export interface IApplyValues {
   terms: ITerm['id'][];
   appliedAt: Date;
   cardId: string;
+  salary: string;
+  creditScore: string;
+  payDate: string;
+}
+
+export interface IOption {
+  label: string;
+  value: string | number | undefined;
 }

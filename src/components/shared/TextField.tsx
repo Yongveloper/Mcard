@@ -14,7 +14,7 @@ interface ITextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
-  function TextFiled(
+  function TextField(
     { label, hasError, helpMessage, onFocus, onBlur, ...props },
     ref,
   ) {
