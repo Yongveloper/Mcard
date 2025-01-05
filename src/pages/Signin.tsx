@@ -5,18 +5,23 @@ import { auth } from '@/remote/firebase';
 import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function SigninPage() {
   const { open } = useAlertContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = useCallback(async (formValues: IFormValues) => {
     const { email, password } = formValues;
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/', { replace: true });
+      if (location.state?.from) {
+        navigate(location.state.from, { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
     } catch (e) {
       // firebase error
       if (e instanceof FirebaseError) {
