@@ -7,6 +7,9 @@ import {
   buttonWeakMap,
 } from '@/styles/button';
 import { css } from '@emotion/react';
+import Flex from './Flex';
+import Text from './Text';
+import Spacing from './Spacing';
 
 interface IButtonProps {
   color?: ButtonColor;
@@ -16,7 +19,7 @@ interface IButtonProps {
   disabled?: boolean;
 }
 
-const Button = styled.button<IButtonProps>(
+const BaseButton = styled.button<IButtonProps>(
   {
     cursor: 'pointer',
     fontWeight: 'bold',
@@ -39,5 +42,42 @@ const Button = styled.button<IButtonProps>(
       cursor: not-allowed;
     `,
 );
+
+function ButtonGroup({
+  title,
+  children,
+}: {
+  title?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Flex direction="column">
+      {title && (
+        <>
+          <Text typography="t6" bold={true}>
+            {title}
+          </Text>
+          <Spacing size={8} />
+        </>
+      )}
+      <Flex css={buttonGroupStyle}>{children}</Flex>
+    </Flex>
+  );
+}
+
+const buttonGroupStyle = css`
+  flex-wrap: wrap;
+  gap: 10px;
+
+  & button {
+    flex: 1;
+  }
+`;
+
+const Button = BaseButton as typeof BaseButton & {
+  Group: typeof ButtonGroup;
+};
+
+Button.Group = ButtonGroup;
 
 export default Button;

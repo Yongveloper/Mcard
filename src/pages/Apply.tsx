@@ -1,29 +1,15 @@
-import BasicInfo from '@/components/apply/BasicInfo';
-import CardInfo from '@/components/apply/CardInfo';
-import Terms from '@/components/apply/Terms';
-import { IApplyValues } from '@/models/apply';
 import { useState } from 'react';
 
+import Apply from '@/components/apply';
+
 function ApplyPage() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
 
-  const handleTermsChange = (terms: IApplyValues['terms']) => {
-    console.log(terms);
+  const handleSubmit = () => {
+    // TODO: 카드신청
   };
 
-  const handleBasicInfoChange = (
-    infoValues: Pick<IApplyValues, 'salary' | 'creditScore' | 'payDate'>,
-  ) => {
-    console.log(infoValues);
-  };
-
-  return (
-    <div>
-      {step === 0 && <Terms onNext={handleTermsChange} />}
-      {step === 1 && <BasicInfo onNext={handleBasicInfoChange} />}
-      {step === 2 && <CardInfo />}
-    </div>
-  );
+  return <Apply step={step} onSubmit={handleSubmit} />;
 }
 
 export default ApplyPage;
