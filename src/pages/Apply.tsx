@@ -1,15 +1,58 @@
-import { useState } from 'react';
-
 import Apply from '@/components/apply';
+import { useApplyCardMutation } from '@/components/apply/hooks/useApplyCardMutation';
+import { usePollApplyStatus } from '@/components/apply/hooks/usePollApplyStatus';
+import { useUser } from '@/hooks/auth/useUser';
+import { APPLY_STATUS } from '@/models/apply';
+import { updateApplyCard } from '@/remote/apply';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function ApplyPage() {
-  const [step, setStep] = useState(2);
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    // TODO: 카드신청
-  };
+  const [readyToPoll, setReadyToPoll] = useState(false);
 
-  return <Apply step={step} onSubmit={handleSubmit} />;
+  const user = useUser();
+  const { id } = useParams() as { id: string };
+
+  usePollApplyStatus({
+    onSuccess: async () => {
+      await updateApplyCard({
+        userId: user?.uid as string,
+        cardId: id,
+        applyValues: {
+          status: APPLY_STATUS.COMPLETE,
+        },
+      });
+      navigate('/apply/done?success=true', { replace: true });
+    },
+    onError: async () => {
+      await updateApplyCard({
+        userId: user?.uid as string,
+        cardId: id,
+        applyValues: {
+          status: APPLY_STATUS.REJECT,
+        },
+      });
+      navigate('/apply/done?success=false', { replace: true });
+    },
+    enabled: readyToPoll,
+  });
+
+  const { mutate, isLoading: 카드를신청중인가 } = useApplyCardMutation({
+    onSuccess: () => {
+      setReadyToPoll(true);
+    },
+    onError: () => {
+      window.history.back();
+    },
+  });
+
+  if (readyToPoll || 카드를신청중인가) {
+    return <div>카드를 신청 중입니다...</div>;
+  }
+
+  return <Apply onSubmit={mutate} />;
 }
 
 export default ApplyPage;

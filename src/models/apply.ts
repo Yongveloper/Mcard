@@ -6,6 +6,13 @@ export interface ITerm {
   title: string;
 }
 
+export const APPLY_STATUS = {
+  READY: 'READY',
+  PROGRESS: 'PROGRESS',
+  COMPLETE: 'COMPLETE',
+  REJECT: 'REJECT',
+} as const;
+
 export interface IApplyValues {
   userId: IUser['uid'];
   terms: ITerm['id'][];
@@ -17,6 +24,7 @@ export interface IApplyValues {
   isMaster: boolean;
   isHipass: boolean;
   isRf: boolean;
+  status: keyof typeof APPLY_STATUS;
 }
 
 export interface IOption {
