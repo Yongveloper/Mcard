@@ -17,5 +17,7 @@
 - Thread를 점유하는 코드를 찾아 제거하기
 - 컴포넌트를 우선순위에 따라 렌더링
 - Layout Shift
+  - Skeleton UI
 - bundle analyzer를 이용하여 번들 사이즈 분석하기
 - Tree Shaking을 이용하여 번들 사이즈 줄이기
+- 브라우저 성능 탭 분석
