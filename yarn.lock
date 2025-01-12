@@ -11054,6 +11054,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-infinite-scroll-component: "npm:^6.1.0"
+    react-intersection-observer: "npm:^9.14.1"
     react-query: "npm:^3.39.3"
     react-router-dom: "npm:^7.1.1"
     react-scripts: "npm:5.0.1"
@@ -12372,6 +12373,19 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
   checksum: 10c0/8de02f178ae861880dddbd0c882dc70b55e21737b87fe428140d81a2c5d13c5eeba8a4fc260b1e86e4c556fdea333d6babaed55a9e5987a42b181b2d92f69cd8
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.14.1":
+  version: 9.14.1
+  resolution: "react-intersection-observer@npm:9.14.1"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 10c0/66587560e9f74672fa62aabe13cc3aabe0e55cbc69c206324f0628ea5d25b6b70f138716074350c945ca390362b35bc8b64568a4fc3f2508c68829cdeb9c96cc
   languageName: node
   linkType: hard
 
