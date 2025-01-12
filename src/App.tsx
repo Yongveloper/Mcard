@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Navbar from './components/shared/Navbar';
@@ -9,7 +11,7 @@ import SigninPage from './pages/Signin';
 import SignupPage from './pages/Signup';
 import TestPage from './pages/Test';
 import ApplyDonePage from './pages/ApplyDone';
-import { Suspense } from 'react';
+import MyPage from './pages/My';
 
 function App() {
   return (
@@ -36,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <ApplyDonePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my"
+          element={
+            <PrivateRoute>
+              <MyPage />
             </PrivateRoute>
           }
         />
