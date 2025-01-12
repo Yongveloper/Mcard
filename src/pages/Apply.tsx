@@ -11,6 +11,12 @@ import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
+const STATUS_MESSAGE = {
+  [APPLY_STATUS.READY]: '카드 심사를 준비하고 있습니다.',
+  [APPLY_STATUS.PROGRESS]: '카드를 심사중입니다. 잠시만 기다려주세요.',
+  [APPLY_STATUS.COMPLETE]: '카드 신청이 완료되었습니다.',
+};
+
 function ApplyPage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -52,7 +58,7 @@ function ApplyPage() {
   // 커스텀 훅 내부에 모두 작성하게 되면 사용하는 부분에서 어떤 일을 하는지 구체적으로 알 수 없다.
   // 훅은 상태 관리와 폴링 로직만 담당하고, 실제 비즈니스 로직은 사용하는 컴포넌트에서 결정한다.
   // 컴포넌트에서 로직을 직접 볼 수 있어 코드의 흐름을 이해하기 쉽다.
-  usePollApplyStatus({
+  const { data: status } = usePollApplyStatus({
     onSuccess: async () => {
       await updateApplyCard({
         userId: user?.uid as string,
@@ -91,7 +97,7 @@ function ApplyPage() {
   }
 
   if (readyToPoll || 카드를신청중인가) {
-    return <FullPageLoader message="카드를 신청 중입니다." />;
+    return <FullPageLoader message={STATUS_MESSAGE[status ?? 'READY']} />;
   }
 
   return <Apply onSubmit={mutate} />;

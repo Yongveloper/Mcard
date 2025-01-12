@@ -5,6 +5,10 @@ import { useUser } from '@/hooks/auth/useUser';
 import { APPLY_STATUS, IApplyValues } from '@/models/apply';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ProgressBar from '../shared/ProgressBar';
+import Spacing from '../shared/Spacing';
+
+const LAST_STEP = 3;
 
 function Apply({
   onSubmit,
@@ -75,6 +79,8 @@ function Apply({
 
   return (
     <div>
+      <ProgressBar progress={(applyValues.step as number) / LAST_STEP} />
+      <Spacing size={20} />
       {applyValues.step === 0 && <Terms onNext={handleTermsChange} />}
       {applyValues.step === 1 && <BasicInfo onNext={handleBasicInfoChange} />}
       {applyValues.step === 2 && <CardInfo onNext={handleCardInfoChange} />}
