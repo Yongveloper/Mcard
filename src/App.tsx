@@ -9,6 +9,7 @@ import SigninPage from './pages/Signin';
 import SignupPage from './pages/Signup';
 import TestPage from './pages/Test';
 import ApplyDonePage from './pages/ApplyDone';
+import { Suspense } from 'react';
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
           path="/apply/:id"
           element={
             <PrivateRoute>
-              <ApplyPage />
+              <Suspense fallback={<></>}>
+                <ApplyPage />
+              </Suspense>
             </PrivateRoute>
           }
         />
