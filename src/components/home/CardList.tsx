@@ -39,7 +39,7 @@ function CardList() {
     return null;
   }
 
-  const cards = flatten(data?.pages.map(({ items }) => items));
+  const cards = flatten(data.pages.map(({ items }) => items));
 
   return (
     <div>
